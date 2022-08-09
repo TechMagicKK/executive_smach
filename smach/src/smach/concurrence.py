@@ -260,18 +260,18 @@ class Concurrence(smach.container.Container):
             # initialized serviced flag
             children_preempts_serviced = True
 
-            # Service this preempt if 
+            # Service this preempt if
             for (label,state) in ((k,self._states[k]) for k in self._states):
                 if state.preempt_requested():
                     # Reset the flag
                     children_preempts_serviced = False
                     # Complain
-                    smach.logwarn("State '%s' in concurrence did not service preempt." % label) 
+                    smach.logwarn("State '%s' in concurrence did not service preempt." % label)
                     # Recall the preempt if it hasn't been serviced
                     state.recall_preempt()
             if children_preempts_serviced:
                 smach.loginfo("Concurrence serviced preempt.")
-                self.service_preempt()
+            self.service_preempt()
 
         # Spew some debyg info
         smach.loginfo("Concurrent Outcomes: "+str(self._child_outcomes))
